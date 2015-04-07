@@ -1,0 +1,14 @@
+{% extends '::layout.html.twig' %}
+
+{% block content -%}
+    <section>
+        <h1>List of articles in {{ tag.name }}</h1>
+        <ul class="list-group">
+            {% for article in tag.article %}
+                <li class="list-group-item">
+                    <a href="{{ path('article_show', {'id': article.id}) }}">{{ article.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

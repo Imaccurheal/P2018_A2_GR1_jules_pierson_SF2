@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Blog Symfony2{% endblock %}</title>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    {% endblock %}
+</head>
+<body>
+<header>
+    <h1>A2 GR1 BLOG SF2</h1>
+</header>
+<main class="container">
+    <nav>
+        <ul class="nav nav-pills">
+
+            <li role="presentation" {% if app.request.get('_route') == 'homepage' %}class="active"{% endif %}>
+                <a href="{{ path('homepage') }}">Home</a>
+            </li>
+            <li role="presentation" {% if app.request.get('_route') == 'article' %}class="active"{% endif %}>
+                <a href="{{ path('article') }}">Articles</a>
+            </li>
+            <li role="presentation" {% if app.request.get('_route') == 'contact' %}class="active"{% endif %}>
+                <a href="{{ path('contact') }}">Contact</a>
+            </li>
+        </ul>
+    </nav>
+    {% block content %}{% endblock %}
+</main>
+<footer>
+    <p class="text-center">License MIT</p>
+</footer>
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% extends '::layout.html.twig' %}
+
+{% block content -%}
+    <section>
+        <h1>List of categories</h1>
+        <ul class="list-group">
+            {% for category in categories %}
+                <li class="list-group-item">
+                    <a href="{{ path('category_show', {'id': category.id}) }}">{{ category.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

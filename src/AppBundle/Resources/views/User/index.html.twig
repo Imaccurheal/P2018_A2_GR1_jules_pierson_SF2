@@ -1,0 +1,14 @@
+{% extends '::layout.html.twig' %}
+
+{% block content -%}
+    <section>
+        <h1>List of users</h1>
+        <ul class="list-group">
+            {% for user in users %}
+                <li class="list-group-item">
+                    <a href="{{ path('user_show', {'id': user.id}) }}">{{ user.firstname }} {{ user.lastname }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

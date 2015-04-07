@@ -1,0 +1,70 @@
+{% extends '::layout.html.twig' %}
+
+{% block content -%}
+    <section class="col-md-9">
+        <h1>
+            List of articles
+        </h1>
+        {% for article in articles %}
+            <article>
+                <div class="row">
+                    <header>
+                        <h2>
+                            {{ article.title }}
+                        </h2>
+                        <h3>
+                            This article was published at :
+                            {% if article.updatedAt%}
+                                {{ article.updatedAt|date('Y-m-d H:i:s') }}
+                            {% else %}
+                                {{ article.createdAt|date('Y-m-d H:i:s') }}
+                            {% endif %}
+                            {% if article.user %}
+                                / by
+                                <a href="{{ path('user_show', {'id': article.user.id}) }}" class="btn btn-primary">{{ article.user }}</a>
+                            {% endif %}
+                            {% if article.category %}
+                                in
+                                <a href="{{ path('category_show', {'id': article.category.id}) }}" class="btn btn-primary">{{ article.category }}</a>
+                            {% endif %}
+                        </h3>
+                    </header>
+                    <figure class="col-md-6">
+                        <img src="{{ article.picture }}" alt="picture" title="{{ article.title }}" class="img-responsive"/>
+                        <figcaption>
+                            {{ article.title }}
+                        </figcaption>
+                    </figure>
+                    <p class="col-md-6">
+                        {{ article.content }}
+                    </p>
+                    <a href="{{ path('article_show', {'id': article.id}) }}" class="col-md-4 col-md-offset-4 row btn btn-primary">
+                        View article
+                    </a>
+                </div>
+            </article>
+        {% endfor %}
+    </section>
+    <aside class="col-md-3">
+        <h2 class="page-header">
+            List if categories
+        </h2>
+        <ul class="list-group">
+            {% for category in categories %}
+                <li class="list-group-item">
+                    <a href="{{ path('category_show', {'id': category.id}) }}">{{ category.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <h2 class="page-header">
+            List if tags
+        </h2>
+        <ul class="list-group">
+            {% for tag in tags %}
+                <li class="list-group-item">
+                    <a href="{{ path('tag_show', {'id': tag.id}) }}">{{ tag.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </aside>
+{% endblock %}

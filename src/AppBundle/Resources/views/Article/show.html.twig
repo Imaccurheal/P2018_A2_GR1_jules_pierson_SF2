@@ -1,0 +1,46 @@
+{% extends '::layout.html.twig' %}
+
+{% block content -%}
+    <section class="col-md-9">
+        <h1>
+            {{ article.title }}
+        </h1>
+        <h2>
+            This article was published at :
+            {% if article.updatedAt%}
+                {{ article.updatedAt|date('Y-m-d H:i:s') }}
+            {% else %}
+                {{ article.createdAt|date('Y-m-d H:i:s') }}
+            {% endif %}
+            {% if article.user %}
+                / by
+                {{ article.user }}
+            {% endif %}
+            {% if article.category %}
+                in
+                <a href="{{ path('category', {'id': article.category.id}) }}" class="btn btn-primary">{{ article.category }}</a>
+            {% endif %}
+        </h2>
+        <figure>
+            <img src="{{ article.picture }}" alt="picture" title="{{ article.title }}" class="img-responsive"/>
+            <figcaption>
+                {{ article.title }}
+            </figcaption>
+        </figure>
+        <p>
+            {{ article.content }}
+        </p>
+    </section>
+    <aside class="col-md-3">
+        <h1>
+            Linked tags
+        </h1>
+        <ul class="list-group">
+            {% for tag in article.tag %}
+                <li class="list-group-item">
+                    <a href="{{ path('tag_show', {'id': tag.id}) }}">{{ tag.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </aside>
+{% endblock %}
